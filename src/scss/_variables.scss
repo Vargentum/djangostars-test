@@ -1,0 +1,29 @@
+// layout params
+$baseMaxWidth                       : 920px;
+$baseMinWidth                       : 320px;
+// colors
+$baseFontColor                      : #3e3c39;
+$titleColor 						: #000;
+$servColor                          : #777670;
+$bodyColor                          : #fff;
+$inputColor                         : $baseFontColor;
+//links colors
+$linkColor                          : #1899cb;
+$activeLinkColor                    : $linkColor;
+$visitedLinkColor                   : $linkColor;
+$hoverLinkColor                     : red;
+$focusedLinkColor                   : $linkColor;
+//fonts
+$baseFamily                         : "PT Sans", sans-serif;
+//misc
+$baseFontSize                       : 13px;
+$baseLineHeight                     : 1.4;
+$paragraphSpace                     : 15px;
+$inputHeight                        : 40px;
+$experimental-support-for-svg       : true;
+
+$default-transition-function        : cubic-bezier(0.075, 0.82, 0.165, 1);
+
+//breakpoints
+$breakpoint-1                       : 980px;
+$breakpoint-2                       : 620px;

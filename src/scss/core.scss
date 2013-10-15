@@ -1,0 +1,371 @@
+@charset "utf-8";
+
+@import "variables";
+@import "assets-static";
+@import "assets-dynamic";
+//@import "icon/*.png";
+//@include all-icon-sprites;
+
+/*===============================================================
+OOCSS
+===============================================================*/
+.oo-moreBtn{
+  display: inline-block;
+  @include border-radius;
+  background-color: #e1e0df;
+  border: 1px solid #d4d2c7;
+  padding: 3 15px;
+  text-transform: uppercase;
+  text-decoration: none;
+  @include singleLink($baseFontColor);
+  &:after{
+    content: "→";
+    margin-left: 5px;
+  }
+  &:hover,&:focus{
+    outline: none;
+    @include scale;
+  }
+}
+.oo-responsiveVideo{
+  position: relative;
+  padding-bottom: 56%;
+  height: 0; overflow: hidden;
+  & iframe,
+  & object,
+  & embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+/*===============================================================
+LAYOUT
+===============================================================*/
+%jLineSmart{
+  .flexbox &{
+    @extend %flexbox;
+    @include vendorize(justify-content, space-between);
+  }
+  .no-flexbox &{@extend %jLine;}
+}
+%container{
+  max-width:$baseMaxWidth;
+  min-width: $baseMinWidth;
+  margin-left:auto;
+  margin-right: auto;
+  @include breakpoint($breakpoint-1){
+    @include fluid-prop(padding-left, 45px, $baseMaxWidth);
+    @include fluid-prop(padding-right, 45px, $baseMaxWidth);
+  }
+}
+
+body {
+  background-color: #e8e8e8;
+  padding: 30px 0;
+  @include breakpoint($breakpoint-1){
+    padding: 0;
+  }
+}
+.l-layout{
+  background-color: $bodyColor;
+  @include border-radius(10px);
+  box-shadow: 0 0 12px rgba(0,0,0,.3);
+  max-width: 1280px;
+  margin: auto;
+  @include breakpoint($breakpoint-1){
+    @include border-radius(none);
+    box-shadow: none;
+  }
+}
+.l-main{
+  @extend %container;
+}
+.l-jLineSmart{
+  @extend %jLineSmart;
+}
+
+/*===============================================================
+HEADER
+===============================================================*/
+.l-header{
+  padding-top: 50px;
+  padding-bottom: 50px;
+  position: relative;
+  @extend %container;
+  @extend %jLine;
+  @include breakpoint($breakpoint-2){
+    padding-top: 10px;
+    padding-bottom: 25px;
+    //.flexbox &{@include vendorize(flex-direction, column);}
+  }
+}
+.logo{
+  text-decoration:none;
+  width: 50px;
+  min-height: 49px;
+  text-align: center;
+  img{
+    display: inline-block;
+    @include single-transition($duration: 1s);
+  }
+  &:hover,&:focus{
+    img{@include rotate(360deg);}
+  }
+  @include breakpoint($breakpoint-2){
+    width: 100%;
+    margin: 15px 0;
+  }
+}
+.logo__hidden{
+  @extend %text-hide;
+  position:absolute;
+}
+
+.nav{
+  @include fluid-width(800px);
+  @extend %jLine;
+  @include breakpoint($breakpoint-2){
+    width: 100%;
+    display: block !important;
+    // for justify content
+    text-align: justify;
+    line-height: 0;
+    font-size: 1px;
+    text-justify: newspaper;
+    zoom:1;
+    text-align-last: justify;
+    &:after{
+      content: "";
+      display: inline-block;
+      height: 0;
+      overflow: hidden;
+      visibility: hidden;
+      width: 100%;
+    }
+    &>*{
+      text-align: left;
+      display: inline-block;
+      line-height: $baseLineHeight;
+      font-size: $baseFontSize;
+    }
+    // for justify content
+  }
+  a{
+    @include fluid-width(225px);
+    padding: 5px 10px;
+    border-left: 1px solid #dcdbd5;
+    @include breakpoint($breakpoint-2){
+      background-color: #e1e0df;
+      @include border-radius;
+      border: 1px solid #d4d2c7;
+      text-align: center;
+      padding: 5px;
+      width: 49%;
+      margin-bottom: 1.5%;
+    }
+  }
+  .hero{
+    display: block;
+    color: $titleColor;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 1px;
+  }
+  .description{
+    @include breakpoint($breakpoint-2){
+      display: none;
+    }
+  }
+}
+
+
+/*===============================================================
+Media
+===============================================================*/
+.mediaSection{
+  margin: 30px 0;
+  &>header{
+    color: $titleColor;
+    text-transform: uppercase;
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: bold;
+
+  }
+}
+.mediaSection--withDividers{
+  margin: 80px 0;
+}
+
+.media__imageContainer{
+  margin-bottom: 10px;
+  border: 1px solid #dcdbd5;
+  img{
+    max-width: 100%;
+    width: 100%;
+    display: block;
+  }
+  &.m-videoContainer{
+    height: 0;
+    padding-bottom: 55.75%;
+  }
+  .media--XL &{
+    margin-bottom: 15px;
+  }
+}
+.media__title{
+  color: $titleColor;
+  font-size: 18px;
+  margin-bottom: 10px;
+  .media--XL &{
+    margin-bottom: 15px;
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .media-M{}
+}
+.media__textContent{
+  display: block;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  .media--L &{-webkit-line-clamp: 3;}
+  .media--M &{-webkit-line-clamp: 5;}
+}
+
+.media{
+  margin-bottom: 20px;
+  footer{margin-top: 15px;}
+  @include breakpoint($breakpoint-2){
+    width: 100% !important;
+  }
+}
+.media--XL{
+  @extend .media;
+  @extend %wysiwyg;
+  color: #777670;
+}
+.media--L{
+  @extend .media;
+  @include fluid-width(440px);
+
+}
+.media--M{
+  @extend .media;
+  @include fluid-width(280px ,$baseMaxWidth);
+}
+.media--S{
+  @extend .media;
+  @include fluid-width(195px ,$baseMaxWidth);
+  footer a{
+    &:after{
+      content: '»';
+      position: relative;
+      font-size: 10px;
+      margin-left: 3px;
+    }
+  }
+}
+
+.media-accordion{
+  padding-bottom: 15px;
+  border-bottom: 1px dotted #dcdbd5;
+  header{cursor: pointer;}
+}
+/*===============================================================
+FOOTER
+===============================================================*/
+.l-footer{
+  position: relative;
+  background-color: #292928;
+  @include border-radius(0 0 10px 10px);
+  @include breakpoint($breakpoint-1){
+    @include border-radius(0);
+  }
+}
+.l-footer__main{
+  @extend %jLine-top;
+  padding: 60px 0;
+  @include breakpoint($breakpoint-2){
+    padding: 0;
+
+  }
+}
+
+.aboutUs{
+  color: #afafa4;
+  @include fluid-width(200px);
+  @include breakpoint($breakpoint-2){
+    display: block;
+    width: 100%;
+    padding: 50px 0;
+    border-bottom: 1px solid #3e3c39;
+  }
+}
+.footerNav{
+  @include fluid-width(680px);
+  @include breakpoint($breakpoint-2){
+    display: block;
+    width: 100%;
+  }
+  &>ul{@extend %jLine-top;}
+  &>ul>li{
+    @include fluid-width(265px);
+    @include breakpoint($breakpoint-2){
+      display: block;
+      width: 100%;
+      margin: 25px 0;
+    }
+  }
+  .hero{
+    color: $bodyColor;
+    display: block;
+    text-transform: uppercase;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+}
+
+.copyright{
+  display: block;
+  width: 100%;
+  border-top: 1px solid #3e3c39;
+  padding: 12px;
+  text-align: center;
+  color: #b8b8ac;
+}
+/*===============================================================
+PAGE TEMPLATES
+===============================================================*/
+
+/*===============================================================
+PLUGIN OVERRIDING
+===============================================================*/
+
+/*===============================================================
+HACKS
+===============================================================*/
+@-moz-document url-prefix() {}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  /* Safari and Chrome */
+  .selector{}
+  /* Safari only override */
+  ::i-block-chrome,.selector{}
+}
+
+
+//debug grid
+//* { outline: 2px dotted red; }
+//* * { outline: 2px dotted green; }
+//* * * { outline: 2px dotted orange; }
+//* * * * { outline: 2px dotted blue; }
+//* * * * * { outline: 1px solid red; }
+//* * * * * * { outline: 1px solid green; }
+//* * * * * * * { outline: 1px solid orange; }
+//* * * * * * * * { outline: 1px solid blue; }
